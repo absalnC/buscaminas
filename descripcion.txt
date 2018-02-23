@@ -1,0 +1,43 @@
+El buscaminas es un juego en el que se muestra un tablero rectangular con muchos botones sin ninguna sena en particular.
+En cada uno de esos botones puede haber una bomba escondida.
+Al dar click en cualquiera de los botones se muestra su contenido(si tiene una bomba o non).
+Si un boton que tiene una bomba escondida es presionado el jugador pierde el juego.
+Si el boton no tiene una bomba se muestra un numero en la superficie de todos los botones vecinos. Este numero indica cuantos de los vecinos de ese boton esconden una bomba. 
+Si alguno de los vecinos de un boton presionado a su vez no tiene ningun vecino con bombas escondidas se considera que ese boton ya ha sido presionado y se muestran los numeros correspondientes de sus vecinos.
+El jugador gana cuando se han presionado todos los botones sin bombas escondidas en ellos.
+
+Elementos:
+Store(almacena el estado con redux)
+Juego
+Estado(Inicial,En juego, victoria, derrota)
+Tablero(Contiene a las celdas)[Parece que crear un componente para el tablero seria un overkill]
+Reinicio
+Celda
+
+Tabla de transiciones
+Variable Juego, Bombas restantes
+ 
+	 Inicial --->  Jugador presiona un boton --->   Partida esta en juego
+
+	 En juego--->  Jugador presiona un boton con bomba---> Derrota|Fin
+
+	 En juego-->   Jugador presiona un boton sin bomba, Bombas restantes >0 ---> En juego
+
+	 En juego --> Jugador presiona un boton sin bomba, Bombas restantes =0 ---> Victoria|Fin
+
+	 Fin --> Reinicio -->  Inicial
+
+
+
+ Variable Bombas restantes 
+
+ 	Bombas restantes >0 --->   Jugador presiona un boton sin bomba ---> Bombas restantes -=1
+
+
+ Variable Fachada de celdas 
+
+ 	En blanco,bomba --> jugador presiona -->   Rojo
+ 	En banco, sin bomba -->  jugador presiona -->  Mostrar  vecinos armados(si vecinos armados = 0 propagar presion en vecinos)
+
+
+
